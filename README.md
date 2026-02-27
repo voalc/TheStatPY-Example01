@@ -21,12 +21,12 @@ class-timetable/
 ├── time-table.js       # Timetable data configuration
 ├── serve.py            # Local development server with python (if needed)
 ├── LICENSE             # License file
+├── sw.js               # Service worker for PWA
 ├── assets/
 │   ├── main.css        # Main stylesheet
 │   ├── portrait.css    # Portrait orientation styles (optional)
 │   ├── landscape.css   # Landscape orientation styles (optional)
 │   ├── script.js       # Main application logic
-│   ├── sw.js           # Service worker for PWA
 │   └── site.webmanifest # PWA manifest file
 ```
 
