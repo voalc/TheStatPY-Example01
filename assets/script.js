@@ -69,3 +69,125 @@
   if (activeElement) {
     activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+
+  /* ================= NOTIFICATION SYSTEM ================= */
+  
+  // Request notification permission on load
+  function requestNotificationPermission() {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }
+
+  // Get next period details
+  function getNextPeriod() {
+    const now = new Date();
+    const currentDay = now.getDay() - 1;
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+
+    // Check today's remaining periods
+    if (currentDay >= 0 && currentDay < days.length) {
+      const todaysPeriods = timetable[days[currentDay]];
+      for (let period of todaysPeriods) {
+        if (timeToMinutes(period.start) > nowMin) {
+          return {
+            day: days[currentDay],
+            period: period,
+            minutesUntilStart: timeToMinutes(period.start) - nowMin
+          };
+        }
+      }
+    }
+
+    // If no remaining periods today, get first period of next week day
+    let nextDayIndex = (currentDay + 1) % days.length;
+    if (nextDayIndex > currentDay || nextDayIndex === 0) {
+      return {
+        day: days[nextDayIndex],
+        period: timetable[days[nextDayIndex]][0],
+        minutesUntilStart: Infinity // Next day
+      };
+    }
+
+    return null;
+  }
+
+  // Notification tracking to avoid duplicates
+  let notificationShown = false;
+  let notificationStartTime = null;
+
+  // Check and send notifications
+  function checkAndNotify() {
+    const next = getNextPeriod();
+    
+    if (!next) return;
+
+    const minutesUntil = next.minutesUntilStart;
+
+    // Send notification when exactly 5 minutes before period starts
+    if (minutesUntil <= 5 && minutesUntil > 4.5 && !notificationShown) {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        notificationShown = true;
+        notificationStartTime = Date.now();
+        
+        const notification = new Notification('Next Period Starting Soon! ⏰', {
+          body: `${next.period.subject} starts at ${next.period.start}`,
+          icon: 'assets/favicon-96x96.png',
+          badge: 'assets/favicon-96x96.png',
+          tag: 'period-notification',
+          requireInteraction: true,
+          data: {
+            period: next.period,
+            day: next.day
+          }
+        });
+
+        // Handle notification clicks
+        notification.onclick = () => {
+          window.focus();
+          notification.close();
+        };
+
+        // Start countdown timer every second
+        const countdownInterval = setInterval(() => {
+          const elapsed = (Date.now() - notificationStartTime) / 1000;
+          const remaining = Math.max(0, 300 - Math.floor(elapsed)); // 300 seconds = 5 minutes
+
+          if (remaining > 0) {
+            const mins = Math.floor(remaining / 60);
+            const secs = remaining % 60;
+            const timeStr = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            
+            // Update notification title with countdown
+            notification.close();
+            new Notification('Next Period Starting Soon! ⏰', {
+              body: `${next.period.subject} starts at ${next.period.start}\n⏱️ ${timeStr} remaining`,
+              icon: 'assets/favicon-96x96.png',
+              badge: 'assets/favicon-96x96.png',
+              tag: 'period-notification',
+              requireInteraction: true,
+              data: {
+                period: next.period,
+                day: next.day
+              }
+            });
+          } else {
+            clearInterval(countdownInterval);
+            notificationShown = false;
+          }
+        }, 1000);
+      }
+    }
+
+    // Reset flag when period starts
+    if (minutesUntil <= 0) {
+      notificationShown = false;
+    }
+  }
+
+  // Check for notifications every 10 seconds
+  setInterval(checkAndNotify, 10000);
+  
+  // Initial check on page load
+  requestNotificationPermission();
+  checkAndNotify();
