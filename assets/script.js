@@ -3,6 +3,144 @@
   // Handle weekends (Saturday=5, Sunday=-1) and out of range days
   if (currentDayIndex < 0 || currentDayIndex >= days.length) currentDayIndex = 0;
 
+  // Load custom timetable from localStorage if it exists
+  function loadTimetable() {
+    const saved = localStorage.getItem('customTimetable');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.log('Failed to parse saved timetable, using default');
+        return timetable;
+      }
+    }
+    return timetable;
+  }
+
+  // Get current timetable (custom or default)
+  let currentTimetable = loadTimetable();
+
+  function saveTimetable() {
+    localStorage.setItem('customTimetable', JSON.stringify(currentTimetable));
+  }
+
+  function resetTimetable() {
+    if (confirm('Are you sure you want to reset the timetable to default?')) {
+      localStorage.removeItem('customTimetable');
+      currentTimetable = JSON.parse(JSON.stringify(timetable));
+      updateEditForm();
+      renderDay();
+    }
+  }
+
+  function toggleEditMode() {
+    document.getElementById('editModal').classList.remove('hidden');
+    document.getElementById('editDay').value = days[currentDayIndex];
+    updateEditForm();
+  }
+
+  function closeEditModal() {
+    document.getElementById('editModal').classList.add('hidden');
+  }
+
+  // Close modal when clicking outside
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('editModal');
+    if (event.target === modal) {
+      closeEditModal();
+    }
+  });
+
+  function updateEditForm() {
+    const selectedDay = document.getElementById('editDay').value;
+    const periods = currentTimetable[selectedDay];
+    const periodsList = document.getElementById('periodsList');
+    periodsList.innerHTML = '';
+
+    periods.forEach((period, index) => {
+      const editor = document.createElement('div');
+      editor.className = 'period-editor';
+      editor.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <strong style="font-size: 14px;">Period ${index + 1}</strong>
+          <button style="background: #ff6b6b; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;" 
+                  onclick="deletePeriod('${selectedDay}', ${index})">Delete</button>
+        </div>
+        <div class="period-editor-row">
+          <div>
+            <label>Start Time:</label>
+            <input type="time" value="${period.start}" onchange="updatePeriodField('${selectedDay}', ${index}, 'start', this.value)">
+          </div>
+          <div>
+            <label>End Time:</label>
+            <input type="time" value="${period.end}" onchange="updatePeriodField('${selectedDay}', ${index}, 'end', this.value)">
+          </div>
+        </div>
+        <label>Subject:</label>
+        <input type="text" value="${period.subject}" onchange="updatePeriodField('${selectedDay}', ${index}, 'subject', this.value)">
+        <label>Type:</label>
+        <select onchange="updatePeriodField('${selectedDay}', ${index}, 'type', this.value)">
+          <option value="theory" ${period.type === 'theory' ? 'selected' : ''}>Theory</option>
+          <option value="lab" ${period.type === 'lab' ? 'selected' : ''}>Lab</option>
+          <option value="elective" ${period.type === 'elective' ? 'selected' : ''}>Elective</option>
+          <option value="project" ${period.type === 'project' ? 'selected' : ''}>Project</option>
+          <option value="break" ${period.type === 'break' ? 'selected' : ''}>Break</option>
+          <option value="sp" ${period.type === 'sp' ? 'selected' : ''}>Special</option>
+          <option value="free" ${period.type === 'free' ? 'selected' : ''}>Free</option>
+          <option value="seminar" ${period.type === 'seminar' ? 'selected' : ''}>Seminar</option>
+          <option value="workshop" ${period.type === 'workshop' ? 'selected' : ''}>Workshop</option>
+          <option value="other" ${period.type === 'other' ? 'selected' : ''}>Other</option>
+        </select>
+      `;
+      periodsList.appendChild(editor);
+    });
+
+    // Add new period button
+    const addBtn = document.createElement('button');
+    addBtn.className = 'btn-save';
+    addBtn.style.width = '100%';
+    addBtn.textContent = '+ Add Period';
+    addBtn.onclick = () => addNewPeriod(selectedDay);
+    periodsList.appendChild(addBtn);
+
+    // Save button
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'btn-save';
+    saveBtn.style.width = '100%';
+    saveBtn.style.marginTop = '10px';
+    saveBtn.textContent = 'Save Changes';
+    saveBtn.onclick = () => {
+      saveTimetable();
+      renderDay();
+      alert('Timetable updated successfully!');
+    };
+    periodsList.appendChild(saveBtn);
+  }
+
+  function updatePeriodField(day, index, field, value) {
+    if (currentTimetable[day] && currentTimetable[day][index]) {
+      currentTimetable[day][index][field] = value;
+    }
+  }
+
+  function deletePeriod(day, index) {
+    if (confirm('Delete this period?')) {
+      currentTimetable[day].splice(index, 1);
+      updateEditForm();
+    }
+  }
+
+  function addNewPeriod(day) {
+    const newPeriod = {
+      start: '09:00',
+      end: '10:00',
+      subject: 'New Subject',
+      type: 'theory'
+    };
+    currentTimetable[day].push(newPeriod);
+    updateEditForm();
+  }
+
   function timeToMinutes(t) {
     const [h, m] = t.split(":").map(Number);
     return h * 60 + m;
@@ -19,7 +157,7 @@
     const container = document.getElementById("timetable");
     container.innerHTML = "";
 
-    timetable[day].forEach(p => {
+    currentTimetable[day].forEach(p => {
       const active = now.getDay() - 1 === currentDayIndex &&
         nowMin >= timeToMinutes(p.start) && nowMin <= timeToMinutes(p.end);
 
@@ -87,7 +225,7 @@
 
     // Check today's remaining periods
     if (currentDay >= 0 && currentDay < days.length) {
-      const todaysPeriods = timetable[days[currentDay]];
+      const todaysPeriods = currentTimetable[days[currentDay]];
       for (let period of todaysPeriods) {
         if (timeToMinutes(period.start) > nowMin) {
           return {
@@ -104,7 +242,7 @@
     if (nextDayIndex > currentDay || nextDayIndex === 0) {
       return {
         day: days[nextDayIndex],
-        period: timetable[days[nextDayIndex]][0],
+        period: currentTimetable[days[nextDayIndex]][0],
         minutesUntilStart: Infinity // Next day
       };
     }

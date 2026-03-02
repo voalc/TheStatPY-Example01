@@ -1,4 +1,4 @@
-# Class Timetable v2.3.0
+# Class Timetable v2.4.0
 
 A responsive, Progressive Web App (PWA) for managing and viewing class schedules with real-time period tracking.
 ![Screenshot of TimeTable PWA](assets/screenshot_360.jpg)
@@ -175,5 +175,5 @@ For issues or questions, please open an [Issue](https://github.com/amalbenny/cla
 
 ---
 
-**Version**: 2.3.0
+**Version**: 2.4.0
 **Last Updated**: February 2026

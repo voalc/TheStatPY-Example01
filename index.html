@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Class Timetable v2.3</title>
+    <title>Class Timetable v2.4</title>
 
     <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
@@ -24,14 +24,46 @@
 </head>
 <body>
     <header>
-        <h1>Class TimeTable v2.3</h1>
-        <button onclick="prevDay()">&#8249;</button>
-        <span id="dayinfo"></span>
-        <button onclick="nextDay()">&#8250;</button>
+        <h1>Class TimeTable v2.4</h1>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button onclick="prevDay()">&#8249;</button>
+            <span id="dayinfo"></span>
+            <button onclick="nextDay()">&#8250;</button>
+            <button id="editBtn" onclick="toggleEditMode()" style="margin-left: auto;">&#9998; Edit</button>
+        </div>
     </header>
     <main id="timetable">
     
     </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Customize Timetable</h2>
+                <button class="close-btn" onclick="closeEditModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 15px;">
+                    <label for="editDay">Select Day:</label>
+                    <select id="editDay" onchange="updateEditForm()">
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                    </select>
+                </div>
+                <div id="periodsList" style="max-height: 400px; overflow-y: auto; margin-bottom: 15px;">
+                    <!-- Periods will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="resetTimetable()" class="btn-danger">Reset to Default</button>
+                <button onclick="closeEditModal()" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
     <script src="time-table.js"></script>
     <script src="assets/script.js"></script>
     <script>
