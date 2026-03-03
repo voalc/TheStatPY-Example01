@@ -198,6 +198,15 @@
     }
   });
 
+  /* ================= KEYBOARD NAVIGATION ================= */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') {
+      prevDay();
+    } else if (e.key === 'ArrowRight') {
+      nextDay();
+    }
+  });
+
   /* ================= LIVE TRACKING ================= */
   setInterval(renderDay, 60000);
 
