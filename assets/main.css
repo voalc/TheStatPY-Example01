@@ -1,4 +1,6 @@
 :root {
+    font-size: 16px;
+    
     --theory: #8400ff;
     --elective: #ffcc00;
     --lab: skyblue;
@@ -13,17 +15,18 @@
 
 *{box-sizing: border-box;}
 body{
-        font-family: "Josefin Sans", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Annie Use Your Telescope","Josefin Sans", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--bg);
         color: var(--text);
         margin: 0;
+        font-size: 1rem;
 }
 
 header{
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
+    gap: 0.9375rem;
+    padding: 1.25rem;
     background-color: #151B23;
     color: whitesmoke;
 }
@@ -34,7 +37,7 @@ header > *:first-child {
 
 header > div {
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     align-items: center;
     flex: 1;
 }
@@ -44,10 +47,10 @@ header button{
     flex: 0 0 auto;
     border: none;
     color: whitesmoke;
-    font-size: 18px;
+    font-size: 1.25rem;
     cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
     transition: background-color 0.2s;
 }
 
@@ -60,31 +63,31 @@ header button:hover {
 }
 
 header h1{
-    font-size: 20px;
+    font-size: 1.5rem;
     margin: 0 0 0 0;
     font-weight:600;
     text-align: center;
     width: 100%;
 }
 #dayinfo{
-    font-size: 18px;
+    font-size: 1.25rem;
     flex: 1 1 auto;
     text-align: center;
     font-weight: 500;
 }
 
-main{ padding: 16px;}
+main{ padding: 1rem;}
 
 .period{
     background-color: var(--card);
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 12px;
+    border-radius: 0.75rem;
+    padding: 0.9375rem;
+    margin-bottom: 0.75rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-left: 6px solid transparent;
+    border-left: 0.375rem solid transparent;
 }
 .period.active{
     border-color: var(--active);
@@ -93,21 +96,22 @@ main{ padding: 16px;}
 .info{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3125rem;
 }
 .time{
-    font-size: 12px;
+    font-size: 1.125rem;
     opacity: 0.7;
 }
 .subject{
-    font-weight: 600;
-    margin-top: 4px;
+    font: 1em noto sans, sans-serif;
+    font-weight: 500;
+    margin-top: 0.25rem;
 }
 
 .type{
-    padding: 6px 10px;
+    font: 1rem "annie use your telescope", sans-serif;
+    padding: 0.375rem 0.625rem;
     border-radius: 999px;
-    font-size: 12px;
     color: #fff;
     font-weight: 600;
     white-space: nowrap;
@@ -149,9 +153,9 @@ main{ padding: 16px;}
 
 .modal-content {
     background-color: var(--card);
-    border-radius: 12px;
+    border-radius: 0.75rem;
     width: 90%;
-    max-width: 600px;
+    max-width: 37.5rem;
     max-height: 85vh;
     display: flex;
     flex-direction: column;
@@ -162,20 +166,20 @@ main{ padding: 16px;}
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 1.25rem;
     border-bottom: 1px solid #e0e0e0;
 }
 
 .modal-header h2 {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.25rem;
     color: var(--text);
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 28px;
+    font-size: 1.75rem;
     color: #666;
     cursor: pointer;
     padding: 0;
@@ -186,58 +190,58 @@ main{ padding: 16px;}
 }
 
 .modal-body {
-    padding: 20px;
+    padding: 1.25rem;
     overflow-y: auto;
     flex: 1;
 }
 
 .modal-footer {
-    padding: 20px;
+    padding: 1.25rem;
     border-top: 1px solid #e0e0e0;
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     justify-content: flex-end;
 }
 
 .period-editor {
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 10px;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 0.625rem;
 }
 
 .period-editor input,
 .period-editor select {
     width: 100%;
-    padding: 8px;
-    margin: 8px 0;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    border-radius: 0.25rem;
+    font-size: 1.125rem;
     font-family: inherit;
 }
 
 .period-editor label {
     display: block;
-    margin-top: 8px;
-    margin-bottom: 4px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 1.125rem;
     color: #555;
 }
 
 .period-editor-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .btn-danger, .btn-secondary, .btn-save {
-    padding: 10px 16px;
+    padding: 0.625rem 1rem;
     border: none;
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: 0.375rem;
+    font-size: 1.125rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -272,8 +276,8 @@ main{ padding: 16px;}
 
 #editDay {
     width: 100%;
-    padding: 10px;
+    padding: 0.625rem;
     border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: 0.375rem;
+    font-size: 1.125rem;
 }

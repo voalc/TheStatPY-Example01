@@ -1,4 +1,4 @@
-const CACHE_NAME = 'timetable-v2.4.1';
+const CACHE_NAME = 'timetable-v2.4.2';
 const urlsToCache = [
   './',
   './index.html',
