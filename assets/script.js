@@ -43,11 +43,25 @@
     document.getElementById('editModal').classList.add('hidden');
   }
 
+  function showAboutInfo() {
+    document.getElementById('aboutModal').classList.remove('hidden');
+  }
+
+  function closeAboutModal() {
+    document.getElementById('aboutModal').classList.add('hidden');
+  }
+
   // Close modal when clicking outside
   window.addEventListener('click', function(event) {
-    const modal = document.getElementById('editModal');
-    if (event.target === modal) {
+    const editModal = document.getElementById('editModal');
+    const aboutModal = document.getElementById('aboutModal');
+
+    if (event.target === editModal) {
       closeEditModal();
+    }
+
+    if (event.target === aboutModal) {
+      closeAboutModal();
     }
   });
 

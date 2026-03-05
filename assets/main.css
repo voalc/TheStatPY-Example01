@@ -162,6 +162,24 @@ main{ padding: 1rem;}
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+.about-modal-content {
+    max-width: 42rem;
+}
+
+.about-body ul {
+    margin-top: 0.5rem;
+    padding-left: 1.25rem;
+}
+
+.about-body li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.about-body a {
+    color: inherit;
+}
+
 .modal-header {
     display: flex;
     justify-content: space-between;
