@@ -9,7 +9,6 @@ from tkinter import filedialog, messagebox
 import sys
 import signal
 import time
-import webbrowser
 
 PORT = 1342
 server_thread = None
@@ -153,13 +152,13 @@ def update_status():
     if is_port_in_use(PORT):
         pid = get_pid_using_port(PORT)
         status_label.config(
-            text=f"Port {PORT} ACTIVE (PID: {pid})",
+            text=f"Port {PORT} is ACTIVE (PID: {pid}) in State",
             fg="red"
         )
         force_btn.config(state="normal")
     else:
         status_label.config(
-            text=f"Port {PORT} FREE",
+            text=f"Port:{PORT} is FREE to Use",
             fg="green"
         )
         force_btn.config(state="disabled")
@@ -179,6 +178,7 @@ def force_stop():
 # -------------------------
 
 def open_browser():
+    import webbrowser
     webbrowser.open(f"http://localhost:{PORT}")
 
 
@@ -191,7 +191,7 @@ root.geometry("600x350")
 
 # Create a frame to hold the directory selection widgets side-by-side
 dir_frame = tk.Frame(root)
-dir_frame.pack(pady=20, padx=10, fill="x")
+dir_frame.pack(pady=25, padx=10, fill="x")
 
 dir_path = tk.StringVar(value=os.getcwd())
 
@@ -199,9 +199,9 @@ tk.Label(dir_frame, text="Directory to Host:").pack(side=tk.LEFT, padx=5)
 tk.Entry(dir_frame, textvariable=dir_path, width=55).pack(side=tk.LEFT, padx=5, expand=True, fill='x')
 tk.Button(dir_frame, text="Browse", command=browse_directory).pack(side=tk.LEFT, padx=5)
 
-status_label = tk.Label(root, text="")
+status_label = tk.Label(root, text="Loading...")
 status_label.pack(pady=2)
-tk.Button(root, text="Refresh Status", command=update_status).pack(pady=(0,8))
+tk.Button(root, text="Refresh Status", command=update_status).pack(pady=(0,15))
 
 tk.Button(root, text="Start Hosting", command=start_hosting, bg="lightgreen").pack(pady=5)
 tk.Button(root, text="Stop Hosting", command=stop_hosting, bg="orange").pack(pady=5)
@@ -210,7 +210,7 @@ force_btn = tk.Button(root, text="Force Stop Port Process", command=force_stop, 
 force_btn.pack(pady=20)
 
 
-tk.Button(root, text="Open in Browser", command=open_browser).pack()
+tk.Button(root, text="Open in Browser - localhost:1342", command=open_browser).pack()
 
 
 update_status()

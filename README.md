@@ -9,9 +9,12 @@ A responsive, Progressive Web App (PWA) for managing and viewing class schedules
 - **Real-time Tracking**: Automatically highlights the current class period
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 - **Touch Gestures**: Swipe left/right to navigate between days
+- **In-App Editor**: Customize your timetable directly in the browser with an intuitive modal editor
+- **Local Storage Persistence**: Changes are saved automatically and persist across sessions
 - **PWA Support**: Install as a standalone app on mobile devices
 - **Offline Capable**: Service worker enables offline functionality
-- **Customizable Schedule**: Easy-to-edit timetable data structure
+- **Reset to Default**: Restore the original timetable with one click
+- **About Modal**: View app information and project links in-app
 
 ## Project Structure
 
@@ -69,7 +72,13 @@ php -S localhost:8000
 
 ## Customizing Your Timetable
 
-Edit the [time-table.js](time-table.js) file to customize your schedule:
+You have two ways to customize your timetable:
+
+### Method 1: In-App Editor (Recommended)
+Use the built-in editor (pencil button) to modify your schedule directly in the browser. No coding required! Your changes are automatically saved to local storage.
+
+### Method 2: Edit Source Code
+For more advanced customization, edit the [time-table.js](time-table.js) file:
 
 ```javascript
 const timetable = {
@@ -102,12 +111,37 @@ The application supports different period types with color-coded badges:
 - `other` - Other activities
 
 ## Usage
-Head to https://amalbenny.github.io/class-timetable/ to view a sample timtable hosted in [GitHub Pages](https://pages.github.com/)
+Head to https://amalbenny.github.io/class-timetable/ to view a sample timetable hosted in [GitHub Pages](https://pages.github.com/)
 ### Navigation
 
-- **Desktop**: Use the arrow buttons (◁ ▷) in the header to switch between days
+- **Desktop**: Use the arrow buttons (◁ ▷) in the header to switch between days or just use arrow keys in keyboard
 - **Mobile/Touch**: Swipe left or right to navigate between days
 - **Current Period**: The currently active period is automatically highlighted
+
+### In-App Timetable Editor
+
+The app now includes a built-in editor for customizing your timetable without editing code:
+
+1. **Open the Editor**: Click the pencil (✎) button in the header
+2. **Select a Day**: Choose the day you want to edit from the dropdown menu
+3. **Edit Periods**: 
+   - Modify the start/end times of any period
+   - Change the subject name
+   - Update the period type (Theory, Lab, Elective, Project, Break, etc.)
+   - Delete a period by clicking the red "Delete" button
+4. **Add New Periods**: Click the "+ Add Period" button to add new classes
+5. **Save Changes**: Click "Save Changes" to persist your edits to local storage
+6. **Reset to Default**: Click the "Reset to Default" button to restore the original timetable
+
+All changes are automatically saved to your browser's local storage and will persist even after closing the app.
+
+### About Information
+
+Click the info (ℹ) button in the header to view:
+- Project description
+- Technology stack details
+- Links to the GitHub repository and live demo
+- Issue reporting and discussion links
 
 ### Installing as PWA
 
@@ -123,6 +157,13 @@ Head to https://amalbenny.github.io/class-timetable/ to view a sample timtable h
 3. The app will be available in your applications menu
 
 ## Configuration
+
+### Data Storage
+
+Your custom timetable changes are stored in your browser's **localStorage**:
+- **Key**: `customTimetable`
+- **Location**: Browser's local storage (persists across sessions)
+- **Clearing Data**: Use the "Reset to Default" button in the editor to clear custom changes, or clear your browser's storage for the site manually
 
 ### Changing the Server Port
 
@@ -150,20 +191,50 @@ To enable different styles for portrait and landscape orientations:
 
 ### File Descriptions
 
-- **index.html**: Main entry point, contains the app structure
-- **time-table.js**: Timetable data configuration
-- **assets/script.js**: Core application logic (rendering, navigation, gesture handling)
+- **index.html**: Main entry point; contains app structure including edit and about modals
+- **time-table.js**: Default timetable data configuration
+- **assets/script.js**: Core application logic including:
+  - Real-time period tracking and rendering
+  - Touch gesture navigation (swipe left/right)
+  - In-app timetable editor with localStorage persistence
+  - Modal management (edit and about modals)
+  - Save/reset functionality
 - **assets/main.css**: Main styles and theme
 - **assets/sw.js**: Service worker for offline caching
 - **assets/site.webmanifest**: PWA manifest configuration
 - **serve.py**: Simple Python HTTP server with auto-browser launch
 
+### Key Features Implementation
+
+#### LocalStorage Persistence
+The app uses browser localStorage to save custom timetable changes:
+- Custom timetables are stored under `customTimetable` key
+- Changes persist across browser sessions
+- Users can reset to default at any time
+- Original data in `time-table.js` remains unchanged
+
+#### In-App Editor Modal
+The editor modal provides:
+- Day selection dropdown
+- Dynamic period editor with inline editing
+- Delete and add period functionality
+- Real-time form updates
+- Save and reset buttons
+
+#### About Modal
+Displays project information including:
+- Feature overview
+- Technology stack
+- Links to GitHub repository and live demo
+- Bug reporting and discussion links
+
 ### Adding New Features
 
 The modular structure makes it easy to extend:
-- Add new period types by updating the CSS in `main.css`
+- Add new period types by updating: CSS in `main.css` and dropdown in `script.js`
 - Modify the layout by editing `index.html` and `main.css`
-- Extend functionality by adding code to `script.js`
+- Extend editor functionality by modifying the modal markup in `index.html` and logic in `script.js`
+- Add custom styles for new period types in the CSS files
 
 ## License
 
@@ -176,4 +247,18 @@ For issues or questions, please open an [Issue](https://github.com/amalbenny/cla
 ---
 
 **Version**: 2.4.4
-**Last Updated**: February 2026
+**Last Updated**: March 2026
+
+## Recent Updates (v2.4+)
+
+### ✨ New Features
+- **In-App Timetable Editor**: No need to edit code – customize your schedule directly in the browser with an intuitive modal interface
+- **Local Storage Persistence**: All changes are automatically saved to your browser and persist across sessions
+- **Reset to Default**: Easily restore the original timetable with a single click
+- **About Modal**: Access project information and useful links directly from the app
+
+### 🔧 Improvements
+- Enhanced modal UI for better usability
+- Automatic period type selection in editor
+- Period deletion and addition capabilities
+- Improved app information display
