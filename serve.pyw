@@ -121,7 +121,6 @@ def start_hosting():
     watch_thread.daemon = True
     watch_thread.start()
 
-    webbrowser.open(f"http://localhost:{PORT}")
     update_status()
 
 
@@ -175,19 +174,34 @@ def force_stop():
             messagebox.showerror("Error", "Could not kill process.")
     update_status()
 
+# -------------------------
+# Open the localhost with browser
+# -------------------------
+
+def open_browser():
+    webbrowser.open(f"http://localhost:{PORT}")
+
 
 # -------------------------
 # GUI Setup
 # -------------------------
 root = tk.Tk()
 root.title(f"Localhost:{PORT} Manager")
-root.geometry("520x300")
+root.geometry("600x350")
+
+# Create a frame to hold the directory selection widgets side-by-side
+dir_frame = tk.Frame(root)
+dir_frame.pack(pady=20, padx=10, fill="x")
 
 dir_path = tk.StringVar(value=os.getcwd())
 
-tk.Label(root, text="Directory to Host:").pack(pady=5)
-tk.Entry(root, textvariable=dir_path, width=55).pack()
-tk.Button(root, text="Browse", command=browse_directory).pack(pady=8)
+tk.Label(dir_frame, text="Directory to Host:").pack(side=tk.LEFT, padx=5)
+tk.Entry(dir_frame, textvariable=dir_path, width=55).pack(side=tk.LEFT, padx=5, expand=True, fill='x')
+tk.Button(dir_frame, text="Browse", command=browse_directory).pack(side=tk.LEFT, padx=5)
+
+status_label = tk.Label(root, text="")
+status_label.pack(pady=2)
+tk.Button(root, text="Refresh Status", command=update_status).pack(pady=(0,8))
 
 tk.Button(root, text="Start Hosting", command=start_hosting, bg="lightgreen").pack(pady=5)
 tk.Button(root, text="Stop Hosting", command=stop_hosting, bg="orange").pack(pady=5)
@@ -195,10 +209,9 @@ tk.Button(root, text="Stop Hosting", command=stop_hosting, bg="orange").pack(pad
 force_btn = tk.Button(root, text="Force Stop Port Process", command=force_stop, bg="red")
 force_btn.pack(pady=20)
 
-status_label = tk.Label(root, text="")
-status_label.pack(pady=5)
 
-tk.Button(root, text="Refresh Status", command=update_status).pack()
+tk.Button(root, text="Open in Browser", command=open_browser).pack()
+
 
 update_status()
 
