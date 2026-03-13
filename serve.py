@@ -4,7 +4,7 @@ import webbrowser
 import os
 
 PORT = 1342  # You can change this port if needed
-DIRECTORY = "."
+DIRECTORY = "./src"  # Change this to the directory you want to serve
 
 # Change working directory to the folder you want to serve
 os.chdir(DIRECTORY)

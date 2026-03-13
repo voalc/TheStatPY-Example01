@@ -19,18 +19,36 @@ A responsive, Progressive Web App (PWA) for managing and viewing class schedules
 ## Project Structure
 
 ```
-class-timetable/
-├── index.html          # Main HTML file
-├── time-table.js       # Timetable data configuration
-├── serve.py            # Local development server with python (if needed)
-├── LICENSE             # License file
-├── sw.js               # Service worker for PWA
-├── assets/
-│   ├── main.css        # Main stylesheet
-│   ├── portrait.css    # Portrait orientation styles (optional)
-│   ├── landscape.css   # Landscape orientation styles (optional)
-│   ├── script.js       # Main application logic
-│   └── site.webmanifest # PWA manifest file
+CLASS-TIMETABLE/
+├── build/
+├── src/
+│   ├── assets/
+│   │   ├── apple-touch-icon.png
+│   │   ├── calendar.png
+│   │   ├── favicon-96x96.png
+│   │   ├── favicon.ico
+│   │   ├── favicon.svg
+│   │   ├── landscape.css
+│   │   ├── main.css                      # Main stylesheet
+│   │   ├── maskable-icon.png
+│   │   ├── portrait.css
+│   │   ├── screenshot_1.jpg
+│   │   ├── screenshot_2.png
+│   │   ├── screenshot_3.png
+│   │   ├── screenshot_4.png
+│   │   ├── screenshot_360.jpg
+│   │   ├── script.js                     # Main application logic
+│   │   ├── site.webmanifest              # PWA manifest file
+│   │   ├── web-app-manifest-192x192.png
+│   │   └── web-app-manifest-512x512.png
+│   ├── index.html                        # Main HTML file
+│   ├── sw.js                             # Service worker for PWA
+│   └── time-table.js                     # Timetable data configuration
+├── build.py                              # Build compressed file for hosting to '../build/'
+├── LICENSE                               # License file
+├── README.md
+├── serve.py                              # Local development server with python (if needed)
+└── serve.pyw
 ```
 
 ## Getting Started

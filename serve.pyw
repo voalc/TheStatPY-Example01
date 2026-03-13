@@ -193,7 +193,7 @@ root.geometry("600x350")
 dir_frame = tk.Frame(root)
 dir_frame.pack(pady=25, padx=10, fill="x")
 
-dir_path = tk.StringVar(value=os.getcwd())
+dir_path = tk.StringVar(value=os.path.join(os.path.dirname(__file__), 'src'))
 
 tk.Label(dir_frame, text="Directory to Host:").pack(side=tk.LEFT, padx=5)
 tk.Entry(dir_frame, textvariable=dir_path, width=55).pack(side=tk.LEFT, padx=5, expand=True, fill='x')

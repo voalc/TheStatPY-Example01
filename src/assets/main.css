@@ -57,7 +57,10 @@ header button{
 header button:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
-
+/* Change font to standardize the size of the buttons and make them more visually appealing (ignore navigation keys) */
+button:not(.default-btn){
+    font-family: 'annie use your telescope', sans-serif;
+}
 #editBtn {
     margin-left: auto;
 }
