@@ -1,7 +1,7 @@
 # Class Timetable v2.4
 
 A responsive, Progressive Web App (PWA) for managing and viewing class schedules with real-time period tracking.
-![Screenshot of TimeTable PWA](assets/screenshot_360.jpg)
+![Screenshot of TimeTable PWA](./src/assets/screenshot_360.jpg)
 
 
 ## Features
