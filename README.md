@@ -264,7 +264,7 @@ For issues or questions, please open an [Issue](https://github.com/amalbenny/cla
 
 ---
 
-**Version**: 2.4.4
+**Version**: 2.4.5
 **Last Updated**: March 2026
 
 ## Recent Updates (v2.4+)
