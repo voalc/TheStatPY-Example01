@@ -30,12 +30,6 @@ jobs:
 
       - name: Build
         run: python build.py
-        continue-on-error: false
-
-      - name: Verify build directory
-        run: |
-          if [ ! -d "./build" ]; then echo "Build directory not found!"; exit 1; fi
-          ls -la ./build/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -43,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'build'
+          path: './build'
 
   deploy:
     environment:
