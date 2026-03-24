@@ -30,7 +30,6 @@ jobs:
 
       - name: Build
         run: python build.py
-        continue-on-error: false
 
       - name: Verify build directory
         run: |
