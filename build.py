@@ -1,9 +1,24 @@
 import os
-import re
 import shutil
+import importlib
 
 SRC_DIR = "./src"
 BUILD_DIR = "./build"
+
+
+def _load_minify_dependencies():
+    try:
+        css_compress = importlib.import_module("csscompressor").compress
+        html_minify = importlib.import_module("minify_html").minify
+        js_minify = importlib.import_module("rjsmin").jsmin
+        return css_compress, html_minify, js_minify
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "Missing build dependency. Install with: pip install -r requirements-build.txt"
+        ) from exc
+
+
+CSS_COMPRESS, HTML_MINIFY, JS_MINIFY = _load_minify_dependencies()
 
 
 def ensure_build_dir():
@@ -41,26 +56,20 @@ def sync_build_dir():
 
 
 def minify_html(content):
-    content = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
-    content = re.sub(r'>\s+<', '><', content)
-    content = re.sub(r'\s+', ' ', content)
-    return content.strip()
+    return HTML_MINIFY(
+        content,
+        minify_css=True,
+        minify_js=True,
+        keep_comments=False,
+    )
 
 
 def minify_css(content):
-    content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-    content = re.sub(r'\s+', ' ', content)
-    content = re.sub(r'\s*([{}:;,])\s*', r'\1', content)
-    content = re.sub(r';}', '}', content)
-    return content.strip()
+    return CSS_COMPRESS(content)
 
 
 def minify_js(content):
-    content = re.sub(r'//.*', '', content)
-    content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-    content = re.sub(r'\s+', ' ', content)
-    content = re.sub(r'\s*([{}();,:+\-*/=<>])\s*', r'\1', content)
-    return content.strip()
+    return JS_MINIFY(content)
 
 
 def process_file(src_path, dest_path):

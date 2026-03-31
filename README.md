@@ -264,16 +264,16 @@ For issues or questions, please open an [Issue](https://github.com/amalbenny/cla
 
 ---
 
-**Version**: 2.4.6<br/>
+**Version**: 2.4.8<br/>
 **Last Updated**: March 2026
 
 ## Recent Updates (v2.4+)
 
-### ✨ New Features
-- **In-App Timetable Editor**: No need to edit code – customize your schedule directly in the browser with an intuitive modal interface
-- **Local Storage Persistence**: All changes are automatically saved to your browser and persist across sessions
-- **Reset to Default**: Easily restore the original timetable with a single click
-- **About Modal**: Access project information and useful links directly from the app
+### ✨ Core Features in v2.4+
+- **In-App Timetable Editor**: Customize your schedule directly in the browser using the modal editor
+- **Local Storage Persistence**: Timetable changes are saved automatically and persist across sessions
+- **Reset to Default**: Restore the original timetable with a single click
+- **About Modal**: View project information and useful links directly in the app
 
 ### 🔧 Improvements
 - Enhanced modal UI for better usability

@@ -28,6 +28,9 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install build dependencies
+        run: pip install -r requirements-build.txt
+
       - name: Build
         run: python build.py
 
