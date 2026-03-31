@@ -2,6 +2,7 @@ import http.server
 import socketserver
 import webbrowser
 import os
+from adminonly.cli_alyod_text import cl
 
 PORT = 1342  # You can change this port if needed
 DIRECTORY = "./src"  # Change this to the directory you want to serve
@@ -14,10 +15,14 @@ Handler = http.server.SimpleHTTPRequestHandler
 
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
     url = f"http://localhost:{PORT}/"
-    print(f"Serving at {url}")
+    print(cl.paint(f"Serving at {cl.paint(url, 'bold')}", "green"))
     
     # Open the default web browser
     webbrowser.open(url)
     
-    # Start the server
-    httpd.serve_forever()
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print(cl.paint("\nShutting down server...", "yellow"))
+        httpd.shutdown()
+        print(cl.paint("Server stopped.", "red"), "\n"*2)

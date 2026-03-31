@@ -29,11 +29,8 @@
 </head>
 <body>
     <header>
-        <h1>Class TimeTable v2.4</h1>
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <button class="default-btn" onclick="prevDay()">&#8249;</button>
-            <span id="dayinfo"></span>
-            <button class="default-btn" onclick="nextDay()">&#8250;</button>
+        <div>
+            <h1>Class TimeTable v2.4</h1>
             <button id="editBtn" onclick="toggleEditMode()" style="margin-left: auto;">
                 <span>&#9998;</span>
             </button>
@@ -41,7 +38,14 @@
                 <span>&#9432;</span>
             </button>
         </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="default-btn" onclick="prevDay()">&#8249;</button>
+            <span id="dayinfo"></span>
+            <button class="default-btn" onclick="nextDay()">&#8250;</button>
+           
+        </div>
     </header>
+
     <main id="timetable">
     
     </main>
