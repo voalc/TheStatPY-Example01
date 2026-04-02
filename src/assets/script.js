@@ -211,7 +211,7 @@
       setTimeout(()=>{
         container.classList.remove(inClass);
             // Scroll to active period ONLY after animation finishes
-            scrollToActive();
+            scrollToActivePeriod();
       },300)
     },300)
   }
