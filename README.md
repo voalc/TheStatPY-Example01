@@ -39,6 +39,7 @@ CLASS-TIMETABLE/
 │   │   ├── screenshot_360.jpg
 │   │   ├── script.js                     # Main application logic
 │   │   ├── site.webmanifest              # PWA manifest file
+│   │   ├── slide.css                     # Slider animation between days
 │   │   ├── web-app-manifest-192x192.png
 │   │   └── web-app-manifest-512x512.png
 │   ├── index.html                        # Main HTML file
@@ -264,7 +265,7 @@ For issues or questions, please open an [Issue](https://github.com/amalbenny/cla
 
 ---
 
-**Version**: 2.4.9<br/>
+**Version**: 2.4.10<br/>
 **Last Updated**: April 2026
 
 ## Recent Updates (v2.4+)

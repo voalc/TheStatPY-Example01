@@ -1,4 +1,4 @@
-const CACHE_NAME = 'timetable-v2.4.9';
+const CACHE_NAME = 'timetable-v2.4.10';
 const urlsToCache = [
   './',
   './index.html',
@@ -10,7 +10,9 @@ const urlsToCache = [
   './assets/favicon.svg',
   './assets/favicon.ico',
   './assets/apple-touch-icon.png',
-  './assets/site.webmanifest'
+  './assets/site.webmanifest',
+  './assets/slide.css',
+  './assets/web-app-manifest-512x512.png'
 ];
 
 // Install event - cache essential files
