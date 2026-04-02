@@ -191,29 +191,32 @@
   }
 
   /* ================= SLIDER & BASIC NAVIGATION ================= */
-  function changeDay(direction){
+  let isAnimating = false;
+
+  function changeDay(direction) {
+    if (isAnimating) return;
+    isAnimating = true;
+
     const container = document.getElementById('timetable');
-    // Apply Slide Out Animation
-    const outClass= direction === 'next' ? 'slide-out-left':'slide-out-right';
+    const outClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
     container.classList.add(outClass);
 
-    setTimeout(()=> {
-      if (direction==='next'){ currentDayIndex=(currentDayIndex + 1) % days.length; }
-      else{ currentDayIndex = (currentDayIndex - 1 + days.length) % days.length; }
-      
+    container.addEventListener('animationend', function onSlideOut() {
+      container.classList.remove(outClass);
+
+      if (direction === 'next') { currentDayIndex = (currentDayIndex + 1) % days.length; }
+      else { currentDayIndex = (currentDayIndex - 1 + days.length) % days.length; }
       renderDay();
 
-      container.classList.remove(outClass);
-      const inClass = direction==='next' ? 'slide-in-right':'slide-in-left';
+      const inClass = direction === 'next' ? 'slide-in-right' : 'slide-in-left';
       container.classList.add(inClass);
 
-      // Cleanup th animation class after it finishes
-      setTimeout(()=>{
+      container.addEventListener('animationend', function onSlideIn() {
         container.classList.remove(inClass);
-            // Scroll to active period ONLY after animation finishes
-            scrollToActivePeriod();
-      },300)
-    },300)
+        isAnimating = false;
+        scrollToActivePeriod();
+      }, { once: true });
+    }, { once: true });
   }
 
   function prevDay() { changeDay('prev') }
