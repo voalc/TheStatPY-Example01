@@ -10,7 +10,7 @@ const urlsToCache = [
   './assets/favicon.svg',
   './assets/favicon.ico',
   './assets/apple-touch-icon.png',
-  './assets/site.webmanifest',
+  './site.webmanifest',
   './assets/slide.css',
   './assets/web-app-manifest-512x512.png'
 ];
