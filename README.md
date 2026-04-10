@@ -38,10 +38,11 @@ CLASS-TIMETABLE/
 │   │   ├── screenshot_4.png
 │   │   ├── screenshot_360.jpg
 │   │   ├── script.js                     # Main application logic
-│   │   ├── site.webmanifest              # PWA manifest file
+│   │   ├── slide.css                     # Slider animation between days
 │   │   ├── web-app-manifest-192x192.png
 │   │   └── web-app-manifest-512x512.png
 │   ├── index.html                        # Main HTML file
+│   ├── site.webmanifest                  # PWA manifest file
 │   ├── sw.js                             # Service worker for PWA
 │   └── time-table.js                     # Timetable data configuration
 ├── build.py                              # Build compressed file for hosting to '../build/'
@@ -181,7 +182,8 @@ Click the info (ℹ) button in the header to view:
 Your custom timetable changes are stored in your browser's **localStorage**:
 - **Key**: `customTimetable`
 - **Location**: Browser's local storage (persists across sessions)
-- **Clearing Data**: Use the "Reset to Default" button in the editor to clear custom changes, or clear your browser's storage for the site manually
+- **Clearing Data**: Use the "Reset to Default" button in the editor to clear custom changes, or clear your browser's
+storage for the site manually
 
 ### Changing the Server Port
 
@@ -264,7 +266,7 @@ For issues or questions, please open an [Issue](https://github.com/amalbenny/cla
 
 ---
 
-**Version**: 2.4.9<br/>
+**Version**: 2.4.10<br/>
 **Last Updated**: April 2026
 
 ## Recent Updates (v2.4+)
