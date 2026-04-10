@@ -1,3 +1,4 @@
+from adminonly.cli_alyod_text import cl
 import os
 import shutil
 import importlib
@@ -14,7 +15,7 @@ def _load_minify_dependencies():
         return css_compress, html_minify, js_minify
     except ModuleNotFoundError as exc:
         raise RuntimeError(
-            "Missing build dependency. Install with: pip install -r requirements-build.txt"
+            "Missing build dependency. Install with: pip install -r requirements-build.txt or ensure the environment is set up correctly."
         ) from exc
 
 
@@ -106,8 +107,13 @@ def build():
             src_file = os.path.join(root, file)
             dest_file = os.path.join(build_root, file)
             process_file(src_file, dest_file)
-
-    print("Build completed successfully.")
+    _log =[
+        cl.paint("  Build Process Completed Successfully!  ", "white", "bold", "bg_green"),
+        cl.paint(f"Source Directory: {SRC_DIR}", "cyan"),
+        cl.paint(f"Build Directory: {BUILD_DIR}", "cyan"),
+        cl.paint("All HTML, CSS, and JS files have been minified for the build directory.", "yellow"),
+    ]
+    cl.box(_log, width=75, color="cyan")
 
 
 if __name__ == "__main__":
