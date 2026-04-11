@@ -14,8 +14,8 @@
       "purpose": "any"
     },
     {
-      "src": "./assets/maskable-icon.png",
-      "sizes": "any",
+      "src": "./assets/web-app-manifest-512x512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
@@ -26,8 +26,8 @@
       "purpose": "any maskable"
     },
     {
-      "src": "./assets/web-app-manifest-512x512.png",
-      "sizes": "512x512",
+      "src": "./assets/maskable-icon.png",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"
     }
