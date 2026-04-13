@@ -170,14 +170,45 @@
     });
   }
 
+  function prettifyCategoryName(category) {
+    return category
+      .replace(/[_-]+/g, ' ')
+      .replace(/\b\w/g, (ch) => ch.toUpperCase());
+  }
+
+  function normalizeSpecialDateItems() {
+    if (!others || typeof others !== 'object') return [];
+
+    const merged = [];
+
+    Object.entries(others).forEach(([category, entries]) => {
+      if (!Array.isArray(entries)) return;
+
+      entries.forEach((entry) => {
+        if (!entry || typeof entry !== 'object' || !entry.date) return;
+
+        const title = entry.subject || entry.name || entry.title || 'Untitled';
+        merged.push({
+          category,
+          categoryLabel: prettifyCategoryName(category),
+          date: entry.date,
+          title,
+          detail: entry.time || entry.note || entry.description || ''
+        });
+      });
+    });
+
+    return merged;
+  }
+
   function renderSpecialDates() {
     const list = document.getElementById('specialDatesList');
     if (!list) return;
 
-    const exams = Array.isArray(others?.exams) ? [...others.exams] : [];
+    const items = normalizeSpecialDateItems();
     list.innerHTML = '';
 
-    if (!exams.length) {
+    if (!items.length) {
       list.innerHTML = '<p class="special-dates-empty">No special dates available.</p>';
       return;
     }
@@ -185,19 +216,22 @@
     const today = new Date();
     const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-    exams.sort((a, b) => new Date(a.date) - new Date(b.date));
+    items.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    exams.forEach((exam) => {
-      const isToday = exam.date === todayStr;
+    items.forEach((item) => {
+      const isToday = item.date === todayStr;
       const card = document.createElement('article');
       card.className = `special-date-card ${isToday ? 'today' : ''}`;
       card.innerHTML = `
         <div class="special-date-header">
-          <strong>${formatSpecialDate(exam.date)}</strong>
+          <strong>${formatSpecialDate(item.date)}</strong>
           ${isToday ? '<span class="today-badge">Today</span>' : ''}
         </div>
-        <div class="special-date-subject">${exam.subject}</div>
-        <div class="special-date-time">Session: ${exam.time}</div>
+        <div class="special-date-meta">
+          <span class="special-date-kind">${item.categoryLabel}</span>
+          ${item.detail ? `<span class="special-date-time">${item.detail}</span>` : ''}
+        </div>
+        <div class="special-date-subject">${item.title}</div>
       `;
       list.appendChild(card);
     });
