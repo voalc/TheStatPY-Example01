@@ -160,6 +160,49 @@
     return h * 60 + m;
   }
 
+  function formatSpecialDate(dateStr) {
+    const date = new Date(`${dateStr}T00:00:00`);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+  }
+
+  function renderSpecialDates() {
+    const list = document.getElementById('specialDatesList');
+    if (!list) return;
+
+    const exams = Array.isArray(others?.exams) ? [...others.exams] : [];
+    list.innerHTML = '';
+
+    if (!exams.length) {
+      list.innerHTML = '<p class="special-dates-empty">No special dates available.</p>';
+      return;
+    }
+
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    exams.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    exams.forEach((exam) => {
+      const isToday = exam.date === todayStr;
+      const card = document.createElement('article');
+      card.className = `special-date-card ${isToday ? 'today' : ''}`;
+      card.innerHTML = `
+        <div class="special-date-header">
+          <strong>${formatSpecialDate(exam.date)}</strong>
+          ${isToday ? '<span class="today-badge">Today</span>' : ''}
+        </div>
+        <div class="special-date-subject">${exam.subject}</div>
+        <div class="special-date-time">Session: ${exam.time}</div>
+      `;
+      list.appendChild(card);
+    });
+  }
+
   function renderDay() {
     const day = days[currentDayIndex];
     document.getElementById("dayinfo").innerText = day;
@@ -254,6 +297,7 @@
   setInterval(renderDay, 60000);
 
   renderDay();
+  renderSpecialDates();
   // 1. Find the first element with the 'active' class and scroll it into view
   function scrollToActivePeriod() {
     const activeElement = document.querySelector('.period.active');

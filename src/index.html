@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Class Timetable v2.4</title>
+    <title>Class Timetable v2.5</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
 
     <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="TimeTable" />
     <link rel="manifest" href="site.webmanifest" />
@@ -31,7 +31,7 @@
 <body>
     <header>
         <div>
-            <h1>Class TimeTable v2.4</h1>
+            <h1>Class TimeTable v2.5</h1>
             <button id="editBtn" onclick="toggleEditMode()" style="margin-left: auto;">
                 <span>&#9998;</span>
             </button>
@@ -50,6 +50,11 @@
     <main id="timetable">
     
     </main>
+
+    <section class="special-dates" aria-labelledby="specialDatesTitle">
+        <h2 id="specialDatesTitle">Special Dates</h2>
+        <div id="specialDatesList"></div>
+    </section>
 
     <!-- Edit Modal -->
     <div id="editModal" class="modal hidden">
@@ -88,7 +93,7 @@
                 <button class="close-btn" style="font-size: 3rem;" onclick="closeAboutModal()">×</button>
             </div>
             <div class="modal-body about-body">
-                <p><strong>Class TimeTable v2.4</strong> is a responsive Progressive Web App for organizing and tracking class schedules with offline support.</p>
+                <p><strong>Class TimeTable v2.5</strong> is a responsive Progressive Web App for organizing and tracking class schedules with offline support.</p>
                 <ul>
                     <li><strong>Open Source:</strong> This project is publicly available and open to community contributions.</li>
                     <li><strong>Tech Stack:</strong> Built with vanilla HTML, CSS, and JavaScript (no framework dependency).</li>

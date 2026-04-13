@@ -81,6 +81,76 @@ header h1{
 
 main{ padding: 1rem;}
 
+.special-dates {
+    margin: 0 1rem 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(120deg, #151b23, #283748);
+    color: #f1f5f9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.special-dates h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+#specialDatesList {
+    display: grid;
+    gap: 0.625rem;
+}
+
+.special-date-card {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.625rem;
+    padding: 0.75rem;
+}
+
+.special-date-card.today {
+    border-color: #ffcc00;
+    box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.25);
+}
+
+.special-date-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.special-date-day {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+.special-date-subject {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 600;
+}
+
+.special-date-time {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    text-transform: capitalize;
+}
+
+.today-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #111827;
+    background: #ffcc00;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+}
+
+.special-dates-empty {
+    opacity: 0.85;
+    margin: 0;
+}
+
 .period{
     background-color: var(--card);
     border-radius: 0.75rem;

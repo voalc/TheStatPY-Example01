@@ -1,4 +1,4 @@
-const CACHE_NAME = 'timetable-v2.4.10';
+const CACHE_NAME = 'timetable-v2.5';
 const urlsToCache = [
   './',
   './index.html',
@@ -8,7 +8,7 @@ const urlsToCache = [
   './sw.js',
   './assets/favicon-96x96.png',
   './assets/favicon.svg',
-  './assets/favicon.ico',
+  './favicon.ico',
   './assets/apple-touch-icon.png',
   './site.webmanifest',
   './assets/slide.css',

@@ -3,8 +3,8 @@ import os
 import shutil
 import importlib
 
-SRC_DIR = "./src"
-BUILD_DIR = "./build"
+SRC_DIR = os.path.join(os.getcwd(),"src") # ./src
+BUILD_DIR = os.path.join(os.getcwd(),"build") # ./build
 
 
 def _load_minify_dependencies():
@@ -108,12 +108,12 @@ def build():
             dest_file = os.path.join(build_root, file)
             process_file(src_file, dest_file)
     _log =[
-        cl.paint("  Build Process Completed Successfully!  ", "white", "bold", "bg_green"),
+        cl.paint("  Build Process Completed Successfully!  ","bold", "bg_cyan", 'black'),
         cl.paint(f"Source Directory: {SRC_DIR}", "cyan"),
         cl.paint(f"Build Directory: {BUILD_DIR}", "cyan"),
         cl.paint("All HTML, CSS, and JS files have been minified for the build directory.", "yellow"),
     ]
-    cl.box(_log, width=75, color="cyan")
+    cl.box(_log, width=100, color="cyan")
 
 
 if __name__ == "__main__":

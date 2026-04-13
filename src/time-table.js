@@ -63,3 +63,12 @@
       { start: "09:00", end: "16:30", subject: "Project Phase II (Full Day)", type: "project" }
     ]
   };
+
+  const others = {
+    exams:[
+      { subject: "MET402 – Mechatronics", date: "2026-04-20", time: "forenoon" },
+      { subject: "Micro and Nano Manufacturing", date: "2026-04-23", time: "forenoon" },
+      { subject: "Composite Materials", date: "2026-04-27", time: "forenoon" },
+      { subject: "Project Planning & Management", date: "2026-04-30", time: "forenoon" }
+    ]
+  }

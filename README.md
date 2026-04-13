@@ -1,4 +1,4 @@
-# Class Timetable v2.4
+# Class Timetable v2.5
 
 A responsive, Progressive Web App (PWA) for managing and viewing class schedules with real-time period tracking.
 ![Screenshot of TimeTable PWA](./src/assets/screenshot_360.jpg)
@@ -266,19 +266,5 @@ For issues or questions, please open an [Issue](https://github.com/amalbenny/cla
 
 ---
 
-**Version**: 2.4.10<br/>
+**Version**: 2.5<br/>
 **Last Updated**: April 2026
-
-## Recent Updates (v2.4+)
-
-### ✨ Core Features in v2.4+
-- **In-App Timetable Editor**: Customize your schedule directly in the browser using the modal editor
-- **Local Storage Persistence**: Timetable changes are saved automatically and persist across sessions
-- **Reset to Default**: Restore the original timetable with a single click
-- **About Modal**: View project information and useful links directly in the app
-
-### 🔧 Improvements
-- Enhanced modal UI for better usability
-- Automatic period type selection in editor
-- Period deletion and addition capabilities
-- Improved app information display
