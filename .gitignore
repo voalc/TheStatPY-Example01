@@ -67,5 +67,5 @@ Thumbs.db
 .env
 .env.local
 
-# Build Files - CAn be automatically triggered by CI/CD pipelines, so we can ignore them in the repository
+# Build Files - Can be automatically triggered by CI/CD pipelines, so we can ignore them in the repository
 build/

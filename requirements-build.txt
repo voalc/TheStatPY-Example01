@@ -1,3 +1,4 @@
 csscompressor
 minify-html
 rjsmin
+beautifulsoup4

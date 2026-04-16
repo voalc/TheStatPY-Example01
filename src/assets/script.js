@@ -24,6 +24,28 @@
     localStorage.setItem('customTimetable', JSON.stringify(currentTimetable));
   }
 
+  function showModalWithAnimation(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    modal.classList.remove('hidden');
+
+    if (modal.classList.contains('thestatpy-animate')) {
+      modal.classList.remove('thestatpy-animate-in');
+      // Force reflow so animation can replay each time the modal is opened.
+      void modal.offsetWidth;
+      modal.classList.add('thestatpy-animate-in');
+    }
+  }
+
+  function hideModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    modal.classList.add('hidden');
+    modal.classList.remove('thestatpy-animate-in');
+  }
+
   function resetTimetable() {
     if (confirm('Are you sure you want to reset the timetable to default?')) {
       localStorage.removeItem('customTimetable');
@@ -34,21 +56,21 @@
   }
 
   function toggleEditMode() {
-    document.getElementById('editModal').classList.remove('hidden');
+    showModalWithAnimation('editModal');
     document.getElementById('editDay').value = days[currentDayIndex];
     updateEditForm();
   }
 
   function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
+    hideModal('editModal');
   }
 
   function showAboutInfo() {
-    document.getElementById('aboutModal').classList.remove('hidden');
+    showModalWithAnimation('aboutModal');
   }
 
   function closeAboutModal() {
-    document.getElementById('aboutModal').classList.add('hidden');
+    hideModal('aboutModal');
   }
 
   // Close modal when clicking outside

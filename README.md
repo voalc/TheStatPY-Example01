@@ -256,6 +256,14 @@ The modular structure makes it easy to extend:
 - Extend editor functionality by modifying the modal markup in `index.html` and logic in `script.js`
 - Add custom styles for new period types in the CSS files
 
+### TheStatPy Regression Checks
+
+Run the regression script to validate nested thestatpy includes, cache behavior, and circular include protection:
+
+```bash
+python test_thestatpy_regression.py
+```
+
 ## License
 
 See the [LICENSE](LICENSE) file for details.

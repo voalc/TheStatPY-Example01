@@ -10,6 +10,8 @@ import sys
 import signal
 import time
 
+from process_thestatpy import process_thestatpy
+
 PORT = 1342
 server_thread = None
 watch_thread = None
@@ -91,10 +93,41 @@ def watch_directory(path):
 # -------------------------
 # HTTP Server
 # -------------------------
+class TheStatPyDevHandler(http.server.SimpleHTTPRequestHandler):
+    """Serve HTML files after resolving <thestatpy> components in development."""
+
+    def do_GET(self):
+        requested_path = self.path.split("?", 1)[0].split("#", 1)[0]
+        file_path = self.translate_path(requested_path)
+
+        if os.path.isdir(file_path):
+            file_path = os.path.join(file_path, "index.html")
+
+        if os.path.isfile(file_path) and file_path.lower().endswith(".html"):
+            try:
+                with open(file_path, "r", encoding="utf-8") as f:
+                    content = f.read()
+
+                processed_content = process_thestatpy(content, os.path.dirname(file_path))
+                payload = processed_content.encode("utf-8")
+
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(payload)))
+                self.end_headers()
+                self.wfile.write(payload)
+                return
+            except Exception as exc:
+                self.send_error(500, f"TheStatPy processing failed: {exc}")
+                return
+
+        super().do_GET()
+
+
 def run_server(directory):
     global httpd
     os.chdir(directory)
-    handler = http.server.SimpleHTTPRequestHandler
+    handler = TheStatPyDevHandler
     httpd = socketserver.TCPServer(("", PORT), handler)
     httpd.serve_forever()
 

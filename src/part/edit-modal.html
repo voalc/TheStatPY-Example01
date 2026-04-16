@@ -1,0 +1,27 @@
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Customize Timetable</h2>
+                <button class="close-btn" style="font-size: 3rem;" onclick="closeEditModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 15px;">
+                    <label for="editDay">Select Day:</label>
+                    <select id="editDay" onchange="updateEditForm()">
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                    </select>
+                </div>
+                <div id="periodsList" style="max-height: 400px; overflow-y: auto; margin-bottom: 15px;">
+                    <!-- Periods will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="resetTimetable()" class="btn-danger">Reset to Default</button>
+                <button onclick="closeEditModal()" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
